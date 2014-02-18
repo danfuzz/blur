@@ -131,8 +131,8 @@ these options:
 
 * `(` &hellip; `)` &mdash; Can be used to group
   together related sets of reqs and targets. When used, the staleness of a
-  target only depends on the reqs in its group. It is only valid to used
-  `--req=`, `--target=`, and `--value=` options within a group. Furthermore,
+  target only depends on the reqs in its group. Within a group, the only
+  valid options are `--req=`, `--target=`, and `--value=`. Furthermore,
   if a rule has any groups, then *all* `--req=`, `--target=`, and `--value=`
   options must be in some group or other.
 
