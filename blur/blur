@@ -108,7 +108,7 @@ fi
 scriptName='blur.sh'
 scriptPath="${dir}/${scriptName}"
 
-if [[ ! (-f ${scriptPath} && -r ${scriptPath} ) ]]; then
+if [[ ! (-f ${scriptPath} && -r ${scriptPath}) ]]; then
     echo "No rules for directory: ${dir}" 1>&2
     exit 1
 fi
