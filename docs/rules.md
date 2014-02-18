@@ -128,6 +128,8 @@ these options:
 
 * `--build-in-dir=<dir>` &mdash; Runs Blur in the given directory, when the
   rule is considered out-of-date. Passes all stale targets to the command.
+  (Yes, "recursive make considered harmful." There is probably a much
+  better solution for the times when this option seems useful.)
 
 * `(` &hellip; `)` &mdash; Can be used to group
   together related sets of reqs and targets. When used, the staleness of a
