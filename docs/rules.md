@@ -70,9 +70,16 @@ variables:
 * `BASE_DIR` &mdash; Parent directory of `PROJECT_DIR`.
 
 Within the rules script, in addition to all the usual shell facilities,
-a number of utility functions are available:
+a number of utility functions are available, including most notably:
 
 * `rule` &mdash; The primary way to emit rules. See below for details.
+* `abs-path` &mdash; Get an absolute path for the given possibly-relative
+  path.
+* `quote` &mdash; Quote each of the arguments as shell-evaluable strings
+  (protecting special characters, spaces, etc. from getting inadvertently
+  interpreted).
+* `unquote` &mdash; Undoes the operation of `quote`.
+
 
 See `blur/blur-util.sh` for more details on the utility functions. (Yes,
 this should be documented better.)
