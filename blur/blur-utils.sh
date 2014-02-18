@@ -424,9 +424,7 @@ function rule-body-rm {
 }
 
 # Emits a rule (or set of rules) of the indicated type, with given additional
-# arguments. Every type accepts any number of `--id=`, `--req=`, `--target`,
-# `--assert=`, `--cmd=`, `--moot`, and `--msg=` options. Beyond that,
-# arguments are type-specific.
+# arguments. See docs for details.
 function rule {
     local type="$1"
     shift
