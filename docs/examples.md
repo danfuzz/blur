@@ -14,16 +14,16 @@ This first one uses Blur's built-in (sorta) pretty printing facility, which
 indents and (optionally) truncates output.
 
 ```shell
-rule body
-    --id=build
+rule body \
+    --id=build \
     --msg='Hello world!'
 ```
 
 This second one just uses good ol' `echo`.
 
 ```shell
-rule body
-    --id=build
+rule body \
+    --id=build \
     --cmd='echo "Hello world!"'
 ```
 
@@ -46,7 +46,7 @@ files=(
 )
 
 rule copy \
-    --id=copy-files
+    --id=copy-files \
     --out-dir=out \
     -- "${files[@]}"
 ```
