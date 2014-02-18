@@ -9,7 +9,7 @@
 # General setup
 #
 
-VERSION=0.1.0
+VERSION=0.1.1
 
 # Set `progName` to the program name, `progDir` to its directory, and `baseDir`
 # to `progDir`'s directory. Follows symlinks.
