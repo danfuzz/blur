@@ -13,7 +13,7 @@ anything that's gotten much real-world use.
 "Blur" doesn't stand for anything, and it's certainly not a reference to
 the tool's blazing fast speed. It's just a description of how
 the stream of tears affects its author's vision whenever he contemplates
-having to use Make... or do build system work in general.
+having to use Make&hellip; or do build system work in general.
 
 
 Documentation
