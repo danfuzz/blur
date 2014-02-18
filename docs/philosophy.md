@@ -31,3 +31,58 @@ and having a whole 'nother layer of syntax to layer it within, Blur flips
 the relationship, so that rule definition is just a regular-looking command
 invocation, embedded in a programming environment which you very likely
 already know (if not love).
+
+### Putting it another way
+
+Whether you acknowledge it or not, a traditional Makefile isn't actually
+just a list of rules. It is, in reality, a script whose output is a
+set of rules. Most real-world Makefiles need to take advantage of that
+scripting power in order to operate.
+
+There are three big problems:
+
+* The rule syntax that Makefiles generate is broken:
+
+  * It can't handle file names that have spaces or certain other characters
+    in them. Such files cannot be mentioned as targets or dependencies.
+
+  * It has no sane way to deal with symbolicly-named targets.
+
+  * It has no straightforward way to specify rules that can incrementally
+    build multiple targets.
+
+  * It gives special meaning to the tab character, and it makes spaces
+    syntactically significant in surprising places. This makes for
+    debugging craziness at times.
+
+* The rule execution semantics of Make is broken:
+
+  * There is no structure to variables, nor to the results of calling
+    macros / functions. Everything is just a string. Things that
+    apparently work on lists (e.g. lists of file names) in fact work
+    on strings, with spaces taken to be the list element separator. This is
+    why much of the built-in functionality can't handle file names with
+    spaces in them.
+
+  * It is difficult to predict or understand when variable / macro /
+    function substitution is going to happen.
+
+* Makefiles bottom out at shell commands, yet the Make system is hostile
+  to such commands:
+
+  * Makefile syntax looks superficially like shell scriping, reusing many of
+    the same characters. This makes it extremely hard to write correct code on
+    those (many) lines where the two syntaxes have to co&euml;xist. It
+    certainly makes all such lines nigh-unreadable.
+
+  * When running, Make produces file names that are to be passed onto
+    shell commands. Unfortunately, Make always produces simple strings,
+    with no possibility of "escaping" shell-significant characters. There
+    is no sane way to handle file names guaranteed-safely.
+
+Both Makefile syntax and shell syntax are quirky and idiomatic, to be
+sure. However, Makefile syntax is the quirkier, idiomaticker, and less
+generally useful one, and there's no way to avoid (something like) issuing
+regular command-line type commands when doing builds. So, if one of the
+syntaxes is going to go, it's a much better choice to kick Make off the
+island.
