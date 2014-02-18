@@ -46,7 +46,7 @@ There are three big problems:
   * It can't handle file names that have spaces or certain other characters
     in them. Such files cannot be mentioned as targets or dependencies.
 
-  * It has no sane way to deal with symbolicly-named targets.
+  * It has no sane way to deal with symbolically-named targets.
 
   * It has no straightforward way to specify rules that can incrementally
     build multiple targets.
@@ -58,7 +58,8 @@ There are three big problems:
 * The rule execution semantics of Make is broken:
 
   * There is no structure to variables, nor to the results of calling
-    macros / functions. Everything is just a string. Things that
+    macros / functions. Every variable is just a string, and every
+    "function call" is just a string substitution. Things that
     apparently work on lists (e.g. lists of file names) in fact work
     on strings, with spaces taken to be the list element separator. This is
     why much of the built-in functionality can't handle file names with
