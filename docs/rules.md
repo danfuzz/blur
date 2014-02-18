@@ -136,6 +136,12 @@ these options:
   if a rule has any groups, then *all* `--req=`, `--target=`, and `--value=`
   options must be in some group or other.
 
+* `--` &mdash; Indicates the end of options, unambiguously. It is good
+  practice to always use a `--` option between options and other arguments,
+  to avoid confusion for when an argument (such as a file whose name
+  happens to start with two dashes) merely has the form of an option,
+  without actually being one.
+
 Some types accept one or more of these options:
 
 * `--in-dir=<dir>` &mdash; Indicates that relative file name arguments
@@ -176,12 +182,12 @@ The rule types are as follows:
   file copy operation is represented by its own rule. If `--chmod` is
   specified, each target is `chmod`ed to the indicated `mode` once copied.
 
-* `mkdir <name> ...` &mdash; Makes directories with the given names. Each
+* `mkdir [--] <name> ...` &mdash; Makes directories with the given names. Each
   directory creation is its own rule.
 
-* `rm [--in-dir=<dir>] <name> ...` &mdash; Removes files or directories with
-  the given names. If `--in-dir` is specified, then relative paths are with
-  respect to that directory (and not the source base directory).
+* `rm [--in-dir=<dir>] [--] <name> ...` &mdash; Removes files or directories
+  with the given names. If `--in-dir` is specified, then relative paths are
+  with respect to that directory (and not the source base directory).
   Each file removal is its own rule. Unless explicitly added, the emitted
   rules have no reqs and no targets. However, the rules are all automatically
   mooted with a check for the non-existence of the named files.
