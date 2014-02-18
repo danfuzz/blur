@@ -437,10 +437,3 @@ function rule {
     parse-rule-args "$@"
     eval "rule-body-${type}"
 }
-
-
-#
-# Directory setup. This has to be done after `abs-path` is defined.
-#
-
-BLUR_DIR="$(abs-path "${BASH_SOURCE[0]%/*}")"
