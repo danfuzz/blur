@@ -32,7 +32,7 @@ the relationship, so that rule definition is just a regular-looking command
 invocation, embedded in a programming environment which you very likely
 already know (if not love).
 
-### Putting it another way
+### But what's really wrong with Make?
 
 Whether you acknowledge it or not, a traditional Makefile isn't actually
 just a list of rules. It is, in reality, a script whose output is a
