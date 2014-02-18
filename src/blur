@@ -1,0 +1,138 @@
+#!/bin/bash
+#
+# Copyright 2014 the Blur Authors (Dan Bornstein et alia).
+# Licensed AS IS and WITHOUT WARRANTY under the Apache License,
+# Version 2.0. Details: <http://www.apache.org/licenses/LICENSE-2.0>
+
+
+#
+# General setup
+#
+
+# Set `progName` to the program name, `progDir` to its directory, and `baseDir`
+# to `progDir`'s directory. Follows symlinks.
+function init-prog {
+    local newp p="$0"
+
+    while newp="$(readlink "$p")"; do
+        [[ ${newp} =~ ^/ ]] && p="${newp}" || p="$(dirname "$p")/${newp}"
+    done
+
+    progName="${p##*/}"
+    progDir="$(cd "$(dirname "$p")"; /bin/pwd -P)"
+    baseDir="$(cd "${progDir}/.."; /bin/pwd -P)"
+}
+
+init-prog
+. "${progDir}/blur-utils.sh"
+
+
+#
+# Argument parsing
+#
+
+# Error flag.
+error=0
+
+# Directory to process.
+dir='.'
+
+# Whether to dump (print) rules before proceeding.
+dump=0
+
+# Options to pass onto `blur-run` option.
+runOpts=()
+
+# Options to pass through to the rules script.
+rulesOpts=()
+
+while [[ $1 != '' ]]; do
+    opt="$1"
+    if [[ ${opt} == '--' ]]; then
+        shift
+        break
+    elif [[ ${opt} == '--help' ]]; then
+        error='usage'
+        break
+    elif [[ ${opt} =~ ^--in-dir=(.*) ]]; then
+        dir="${BASH_REMATCH[1]}"
+    elif [[ ${opt} == --dump ]]; then
+        dump=1
+    elif [[ ${opt} =~ ^--quiet ||
+            ${opt} =~ ^--verbose= ||
+            ${opt} =~ ^--depth= ]]; then
+        runOpts+=("${opt}")
+    elif [[ ${opt} =~ ^-- ]]; then
+        rulesOpts+=("${opt}")
+    elif [[ ${opt} =~ ^-. ]]; then
+        echo "Invalid option: ${opt}" 1>&2
+        error=1
+    else
+        break
+    fi
+    shift
+done
+unset opt
+
+# Targets (files or named ids).
+targets=("$@")
+
+if [[ ${#targets[@]} == 0 ]]; then
+    # Default target.
+    targets=(build)
+fi
+
+if [[ ${error} != 0 ]]; then
+    echo 1>&2 "${progName} --help"
+    echo 1>&2 "${progName} [--quiet | --verbose=<level>] [--dump]"
+    echo 1>&2 "    [--in-dir=<dir>] [--<build-opt> ...] (target-file | id) ..."
+    if [[ ${error} == 'usage' ]]; then
+        error=0
+    fi
+    exit ${error}
+fi
+
+
+#
+# Main script
+#
+
+# Find a blur rules script in the designated directory.
+
+scriptName='blur.sh'
+scriptPath="${dir}/${scriptName}"
+
+if [[ ! (-f ${scriptPath} && -r ${scriptPath} ) ]]; then
+    echo "No rules for directory: ${dir}" 1>&2
+    exit 1
+fi
+
+cd "${dir}" # The rest of the script runs in the context of `dir`.
+
+# Run the script, and collect output.
+
+BASE_DIR="$(abs-path ..)"
+PROJECT_DIR="$(abs-path .)"
+PROJECT_NAME="${PROJECT_DIR##*/}"
+
+rules="$(
+    BASE_DIR="${BASE_DIR}" \
+    PROJECT_DIR="${PROJECT_DIR}" \
+    PROJECT_NAME="${PROJECT_NAME}" \
+    BASH_ENV="${progDir}/blur-utils.sh" \
+        bash -- "./${scriptName}" "${rulesOpts[@]}"
+)"
+
+if [[ $? != 0 ]]; then
+    echo "Trouble generating rules." 1>&2
+    exit 1
+fi
+
+if (( dump )); then
+    printf '%s\n' "${rules}"
+fi
+
+# Run `blur-run`, passing it the rules.
+
+printf '%s\n' "${rules}" | \
+    "${progDir}/blur-run" "${runOpts[@]}" -- "${targets[@]}"
