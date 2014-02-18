@@ -27,16 +27,19 @@ Documentation
 * [Examples](docs/examples.md)
 * [Acknowledgements](docs/acknowledgements.md)
 
+
 Contributing
 ------------
 
 See [CONTRIBUTING.md](CONTRIBUTING.md).
+
 
 License
 -------
 
 Licensed under the Apache License, Version 2.0. See [LICENSE.md](LICENSE.md)
 and <http://www.apache.org/licenses/LICENSE-2.0>.
+
 
 Authors
 -------
