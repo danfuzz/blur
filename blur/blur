@@ -117,7 +117,6 @@ cd "${dir}" # The rest of the script runs in the context of `dir`.
 
 # Run the script, and collect output.
 
-
 rules="$(
     export BASE_DIR="$(abs-path ..)"
     export PROJECT_DIR="$(abs-path .)"
