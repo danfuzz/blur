@@ -9,6 +9,8 @@
 # General setup
 #
 
+VERSION=0.1.0
+
 # Set `progName` to the program name, `progDir` to its directory, and `baseDir`
 # to `progDir`'s directory. Follows symlinks.
 function init-prog {
@@ -51,6 +53,9 @@ while [[ $1 != '' ]]; do
     if [[ ${opt} == '--' ]]; then
         shift
         break
+    elif [[ ${opt} == '--version' ]]; then
+        echo "${progName} ${VERSION}"
+        exit
     elif [[ ${opt} == '--help' ]]; then
         error='usage'
         break
@@ -84,6 +89,7 @@ fi
 
 if [[ ${error} != 0 ]]; then
     echo 1>&2 "${progName} --help"
+    echo 1>&2 "${progName} --version"
     echo 1>&2 "${progName} [--quiet | --verbose=<level>] [--dump]"
     echo 1>&2 "    [--in-dir=<dir>] [--<build-opt> ...] (target-file | id) ..."
     if [[ ${error} == 'usage' ]]; then
