@@ -117,16 +117,13 @@ cd "${dir}" # The rest of the script runs in the context of `dir`.
 
 # Run the script, and collect output.
 
-BASE_DIR="$(abs-path ..)"
-PROJECT_DIR="$(abs-path .)"
-PROJECT_NAME="${PROJECT_DIR##*/}"
 
 rules="$(
-    BASE_DIR="${BASE_DIR}" \
-    PROJECT_DIR="${PROJECT_DIR}" \
-    PROJECT_NAME="${PROJECT_NAME}" \
-    BASH_ENV="${progDir}/blur-utils.sh" \
-        bash -- "./${scriptName}" "${rulesOpts[@]}"
+    export BASE_DIR="$(abs-path ..)"
+    export PROJECT_DIR="$(abs-path .)"
+    export PROJECT_NAME="${PROJECT_DIR##*/}"
+    export BASH_ENV="${progDir}/blur-utils.sh"
+    bash -- "./${scriptName}" "${rulesOpts[@]}"
 )"
 
 if [[ $? != 0 ]]; then
