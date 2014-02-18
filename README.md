@@ -1,6 +1,8 @@
 Blur
 ====
 
+### "I'd rather write shell scripts than Makefiles."
+
 Blur is a very simple build system, with (practically speaking) no
 dependencies.
 
