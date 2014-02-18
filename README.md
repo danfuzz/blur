@@ -3,10 +3,12 @@ Blur
 
 ### "I'd rather write shell scripts than Makefiles."
 
-Blur is a very simple target-driven (top-down) build system, with
-(practically speaking) no dependencies. As of this writing, it is
-mostly an experiment and a demonstration, and not anything that's gotten
-much real-world use.
+Blur is a very small and simple target-driven (top-down) build system, with
+(practically speaking) no dependencies: It is written entirely as a small
+handful of Bash scripts, totalling about 1,200 lines.
+
+As of this writing, Blur is mostly an experiment and a demonstration, and not
+anything that's gotten much real-world use.
 
 "Blur" doesn't stand for anything, and it's certainly not a reference to
 the tool's blazing fast speed. It's just a description of how
