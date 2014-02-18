@@ -22,6 +22,7 @@ Documentation
 * [Rule Semantics](docs/rules.md)
 * [Limitations](docs/limitations.md)
 * [Examples](docs/examples.md)
+* [Acknowledgements](docs/acknowledgements.md)
 
 Contributing
 ------------
