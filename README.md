@@ -18,6 +18,7 @@ Documentation
 * [Running](docs/running.md)
 * [Rule Semantics](docs/rules.md)
 * [Limitations](docs/limitations.md)
+* [Examples](docs/examples.md)
 
 Contributing
 ------------
