@@ -186,7 +186,7 @@ function msg {
         fi
     fi
 
-    if (( spew <= 2 )); then
+    if (( spew <= 2 && level >= 0 )); then
         if (( ${#line} > max )); then
             local len=$(( (max - 5) / 2 ))
             line="${line:0:${len}} ... ${line:$(( ${#line} - len ))}"

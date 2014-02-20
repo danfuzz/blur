@@ -9,7 +9,7 @@
 # General setup
 #
 
-VERSION=0.1.1
+VERSION=0.1.2
 
 # Set `progName` to the program name, `progDir` to its directory, and `baseDir`
 # to `progDir`'s directory. Follows symlinks.
@@ -116,6 +116,7 @@ fi
 cd "${dir}" # The rest of the script runs in the context of `dir`.
 
 # Run the script, and collect output.
+
 
 rules="$(
     export BASE_DIR="$(abs-path ..)"
