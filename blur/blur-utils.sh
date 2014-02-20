@@ -3,7 +3,7 @@
 # Version 2.0. Details: <http://www.apache.org/licenses/LICENSE-2.0>
 
 #
-# Helper library. Meant to be included via `.` command.
+# Helper library. Meant to be included via `.` command or `BASH_ENV` variable.
 #
 
 
